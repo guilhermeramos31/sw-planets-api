@@ -8,7 +8,7 @@ import lombok.Data;
 @Table(name = "planets")
 public class Planet {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private String name;
