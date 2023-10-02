@@ -1,12 +1,12 @@
 package com.compass.pb.swplanetsapi.models.dtos;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class PlanetResponseDTO {
     private Long id;
     private String name;
