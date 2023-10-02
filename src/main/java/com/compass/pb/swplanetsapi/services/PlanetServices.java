@@ -1,26 +1,30 @@
 package com.compass.pb.swplanetsapi.services;
 
+import com.compass.pb.swplanetsapi.exceptions.PlanetNotFoundException;
 import com.compass.pb.swplanetsapi.models.dtos.PlanetRequestDTO;
 import com.compass.pb.swplanetsapi.models.dtos.PlanetResponseDTO;
 import com.compass.pb.swplanetsapi.repositorys.PlanetRepository;
-
+import com.compass.pb.swplanetsapi.services.assembler.PlanetDTOAssembler;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
+@Service
+@RequiredArgsConstructor
 public class PlanetServices {
-    private PlanetRepository planetRepository;
-    public PlanetServices(PlanetRepository planetRepository){
-        this.planetRepository = planetRepository;
-    }
-    public Optional<PlanetRepository> findById(PlanetResponseDTO entity){
-        return planetRepository.findById(entity.getId());
+    private final PlanetRepository planetRepository;
+    private final PlanetDTOAssembler planetDTOAssembler;
+    public PlanetResponseDTO findById(Long id) {
+        var planet = planetRepository.findById(id).orElseThrow(PlanetNotFoundException::new);
+        return planetDTOAssembler.toDTO(planet);
     }
     public List<PlanetResponseDTO> findAll(){
-        return planetRepository.findAll();
+        return planetDTOAssembler.toDTO(planetRepository.findAll());
     }
     public void save(PlanetRequestDTO planetRequestDTO){
-        if (planetRequestDTO.getClimate() == "" && planetRequestDTO.getName() == "" && planetRequestDTO.getTerrain() == ""){
-            planetRepository.save(planetRequestDTO);
+        var assembler = planetDTOAssembler.toModel(planetRequestDTO);
+        if (!planetRequestDTO.getClimate().isEmpty() && !planetRequestDTO.getName().isEmpty() && !planetRequestDTO.getTerrain().isEmpty()){
+            planetRepository.save(assembler);
         }
     }
 }
