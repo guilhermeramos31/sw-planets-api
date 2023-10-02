@@ -1,11 +1,15 @@
 package com.compass.pb.swplanetsapi.models.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "planets")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Planet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
