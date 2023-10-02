@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class PlanetController {
     private final PlanetServices planetServices;
 
-    @GetMapping("{/planetId}")
-    public ResponseEntity<PlanetResponseDTO> getIdPlanet(@PathVariable Long planetId) throws Throwable {
+    @GetMapping("/{planetId}")
+    public ResponseEntity<PlanetResponseDTO> getIdPlanet(@PathVariable Long planetId) {
         return ResponseEntity.ok(planetServices.findById(planetId));
     }
+
 }
