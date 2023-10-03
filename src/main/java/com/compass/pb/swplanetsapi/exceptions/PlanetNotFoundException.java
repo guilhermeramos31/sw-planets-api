@@ -5,8 +5,8 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 public class PlanetNotFoundException extends RuntimeException{
-    private ErrorCode errorCode;
-    private HttpStatus status;
+    private final ErrorCode errorCode;
+    private final HttpStatus status;
 
     public PlanetNotFoundException(){
         super(ErrorCode.NOT_FOUND.name());
