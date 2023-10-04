@@ -26,15 +26,9 @@ public class PlanetServices {
     public PlanetRequestDTO save(PlanetRequestDTO planetRequestDTO){
         var assembler = planetDTOAssembler.requestDTOToModel(planetRequestDTO);
         PlanetRequestDTO planetResponse = planetDTOAssembler.toRequestDTO(planetRepository.save(assembler));
-        if (planetResponse.getName().isBlank()){
-            throw new NameFormatNotAcceptableException();
-        }
-        if (planetResponse.getClimate().isBlank()){
-            throw new ClimateFormatNotAcceptableException();
-        }
-        if (planetResponse.getTerrain().isBlank()){
-            throw new TerrainFormatNotAcceptableException();
-        }
+        if (planetResponse.getName().isBlank()) throw new NameFormatNotAcceptableException();
+        if (planetResponse.getClimate().isBlank()) throw new ClimateFormatNotAcceptableException();
+        if (planetResponse.getTerrain().isBlank()) throw new TerrainFormatNotAcceptableException();
         return planetResponse;
     }
 }
