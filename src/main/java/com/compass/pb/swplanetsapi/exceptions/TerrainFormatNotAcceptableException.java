@@ -8,9 +8,9 @@ public class TerrainFormatNotAcceptableException extends RuntimeException implem
     private final ErrorCode errorCode;
     private final HttpStatus status;
 
-    public TerrainFormatNotAcceptableException(ErrorCode errorCode, HttpStatus status) {
+    public TerrainFormatNotAcceptableException() {
         super(ErrorCode.NOT_ACCEPTABLE.name());
-        this.errorCode = errorCode;
-        this.status = status;
+        this.errorCode =  ErrorCode.NOT_ACCEPTABLE;
+        this.status = HttpStatus.NOT_ACCEPTABLE;
     }
 }

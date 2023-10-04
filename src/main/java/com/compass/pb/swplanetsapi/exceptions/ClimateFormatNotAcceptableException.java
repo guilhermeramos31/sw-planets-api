@@ -8,9 +8,9 @@ public class ClimateFormatNotAcceptableException extends RuntimeException implem
     private final ErrorCode errorCode;
     private final HttpStatus status;
 
-    public ClimateFormatNotAcceptableException(ErrorCode errorCode, HttpStatus status) {
+    public ClimateFormatNotAcceptableException() {
         super(ErrorCode.NOT_ACCEPTABLE.name());
-        this.errorCode = errorCode;
-        this.status = status;
+        this.errorCode =  ErrorCode.NOT_ACCEPTABLE;
+        this.status = HttpStatus.NOT_ACCEPTABLE;
     }
 }
