@@ -1,13 +1,13 @@
 package com.compass.pb.swplanetsapi.controllers;
 
+import com.compass.pb.swplanetsapi.models.dtos.PlanetRequestDTO;
 import com.compass.pb.swplanetsapi.models.dtos.PlanetResponseDTO;
 import com.compass.pb.swplanetsapi.services.PlanetServices;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,5 +19,8 @@ public class PlanetController {
     public ResponseEntity<PlanetResponseDTO> getIdPlanet(@PathVariable Long planetId) {
         return ResponseEntity.ok(planetServices.findById(planetId));
     }
-
+    @PostMapping
+    public ResponseEntity<PlanetRequestDTO> postPlanet(@RequestBody  @Validated PlanetRequestDTO planet){
+        return ResponseEntity.status(HttpStatus.CREATED).body(planetServices.save(planet));
+    }
 }

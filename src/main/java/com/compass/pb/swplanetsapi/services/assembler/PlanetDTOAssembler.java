@@ -13,15 +13,28 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PlanetDTOAssembler {
     private final ModelMapper modelMapper;
-    public PlanetResponseDTO toDTO(Planet planet){
+    public PlanetResponseDTO toResponseDTO(Planet planet){
         return modelMapper.map(planet, PlanetResponseDTO.class);
     }
-    public Planet toModel(PlanetRequestDTO planetRequestDTO){
-        return modelMapper.map(planetRequestDTO, Planet.class);
+    public PlanetRequestDTO toRequestDTO(Planet planet){
+        return modelMapper.map(planet, PlanetRequestDTO.class);
     }
-    public List<PlanetResponseDTO> toDTO(List<Planet> planets){
+
+    public Planet requestDTOToModel(PlanetRequestDTO planet){
+        return modelMapper.map(planet, Planet.class);
+    }
+    public Planet responseDTOToModel(PlanetResponseDTO planet){
+        return modelMapper.map(planet, Planet.class);
+    }
+    public List<PlanetResponseDTO> modelToResponseDTO(List<Planet> planets){
         List<PlanetResponseDTO> planetsDTO = new ArrayList<>();
-        planets.forEach( e -> planetsDTO.add(toDTO(e)));
+        planets.forEach( e -> planetsDTO.add(toResponseDTO(e)));
+        return planetsDTO;
+    }
+
+    public List<PlanetRequestDTO> modelToRequestDTO(List<Planet> planets){
+        List<PlanetRequestDTO> planetsDTO = new ArrayList<>();
+        planets.forEach( e -> planetsDTO.add(toRequestDTO(e)));
         return planetsDTO;
     }
 }
